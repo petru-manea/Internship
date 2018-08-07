@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dao.product.ProductDAO;
+import com.model.product.ProductDTO;
 import com.model.product.ProductEntity;
-import com.model.product.ProductTypeEntity;
+import com.model.product.ProductMapper;
+import com.model.product.ProductTypeDTO;
 
 @Controller
 @RequestMapping(path = "/demo")
@@ -17,6 +19,9 @@ public class MainController {
 	
 	@Autowired
 	private ProductDAO productDAO;
+	
+	@Autowired
+	private ProductMapper productMapper;
 
 	@GetMapping(path = "/add")
 	public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email) {
@@ -25,14 +30,14 @@ public class MainController {
 //		n.setName(name);
 //		n.setEmail(email);
 //		userRepository.save(n);
-		ProductEntity entity = new ProductEntity();
-		entity.setName("TestName");
-		entity.setPrice(200L);
-		entity.setType(ProductTypeEntity.HOUSE);
-		entity.setArea(300);
-		entity.setLocation("TestLocation");
+		ProductDTO x = new ProductDTO();
+		x.setName("TestName");
+		x.setPrice(200L);
+		x.setType(ProductTypeDTO.HOUSE);
+		x.setArea(300);
+		x.setLocation("TestLocation");
 		
-		productDAO.save(entity);
+		productDAO.save(productMapper.mapDtoToEntity(x));
 		
 		return "Product Saved";
 	}
