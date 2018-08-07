@@ -21,6 +21,7 @@ public class ProductMapper {
 		}
 		
 		ProductDTO dto = new ProductDTO();
+		dto.setId(entity.getId());
 		dto.setName(entity.getName());
 		dto.setPrice(entity.getPrice());
 		dto.setType(mapTypeEntityToDto(entity.getType()));
@@ -37,6 +38,7 @@ public class ProductMapper {
 		}
 		
 		ProductEntity entity = new ProductEntity();
+		entity.setId(dto.getId());
 		entity.setName(dto.getName());
 		entity.setPrice(dto.getPrice());
 		entity.setType(mapTypeDtoToEntity(dto.getType()));

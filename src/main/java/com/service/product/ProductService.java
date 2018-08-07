@@ -5,30 +5,32 @@ import com.model.product.ProductDTO;
 public interface ProductService {
 
 	/**
+	 * Saves the product to database
 	 * 
 	 * @param product
 	 */
 	void addProduct(ProductDTO product);
 
 	/**
+	 * Retrieves the product from database based on id
 	 * 
 	 * @param id
 	 * @return
 	 */
-	ProductDTO getProductById(Integer id);
-
 	ProductDTO getProductById(String id);
 
-	void updateProduct(ProductDTO product);
 	/**
+	 * Updates the product with new values
 	 * 
-	 * @param update product
+	 * @param product
 	 */
+	void updateProduct(ProductDTO product);
 
-	void deleteProduct(ProductDTO product);
 	/**
-	 *
-	 * @param delete product
+	 * Removes the product from database
+	 * 
+	 * @param product
 	 */
+	void deleteProduct(ProductDTO product);
 
 }

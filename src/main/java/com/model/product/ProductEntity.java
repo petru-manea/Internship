@@ -84,7 +84,7 @@ public class ProductEntity extends BaseEntity {
 	@Override
 	public String toString() {
 		return "ProductEntity [id=" + getId() + ", name=" + name + ", price=" + price + ", type=" + type.name() + ", area=" + area
-				+ ", location=" + location + ", image=" + image.length + "]";
+				+ ", location=" + location + "]";
 	}
 
 }

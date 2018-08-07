@@ -30,29 +30,41 @@ public class ProductController {
 
 	@RequestMapping(path = "/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseWrapper<ProductDTO> addProduct(@RequestParam String name, @RequestParam Long price,
-			@RequestParam ProductTypeDTO type, @RequestParam Integer area, @RequestParam String location, byte[] image,
+			@RequestParam String type, @RequestParam Integer area, @RequestParam String location, byte[] image,
 			HttpServletRequest httpRequest) {
 
-		String urlParams = "/add?" + "name=" + name + "&price=" + price + "&type=" + type.getName() + "&area=" + area
+		String urlParams = "/add?" + "name=" + name + "&price=" + price + "&type=" + type + "&area=" + area
 				+ "&location=" + location + "&image=" + image;
-
-		ProductDTO product = constructProductFromParams(name, price, type, area, location, image);
-
-		productService.addProduct(product);
 
 		ResponseWrapper<ProductDTO> responseWrapper = new ResponseWrapper<ProductDTO>();
 
-		responseWrapper.setData(product);
-		responseWrapper.setStatus(HttpStatus.OK);
-		responseWrapper.setUrlParams(urlParams);
+		for (ProductTypeDTO typeDto : ProductTypeDTO.values()) {
+			if (typeDto.name().equalsIgnoreCase(type)) {
+				ProductDTO product = constructProductFromParams(name, price, ProductTypeDTO.valueOf(type.toUpperCase()),
+						area, location, image);
 
-		LOGGER.info("Succesfully created product : " + product.toString());
+				productService.addProduct(product);
+
+				responseWrapper.setData(product);
+				responseWrapper.setStatus(HttpStatus.OK);
+				responseWrapper.setUrlParams(urlParams);
+
+				LOGGER.info("Succesfully created product : " + product.toString());
+
+				return responseWrapper;
+			}
+		}
+
+		responseWrapper.setData(null);
+		responseWrapper.setStatus(HttpStatus.BAD_REQUEST);
+		responseWrapper.setError("Product type was not found: " + type);
+		LOGGER.info("Product type was not found: " + type);
 
 		return responseWrapper;
 	}
 
 	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseWrapper<ProductDTO> getProductById(@PathVariable(value = "id") Integer id) {
+	public @ResponseBody ResponseWrapper<ProductDTO> getProductById(@PathVariable(value = "id") String id) {
 
 		String urlParams = "/" + id;
 
@@ -76,11 +88,11 @@ public class ProductController {
 	}
 
 	@RequestMapping(path = "/{id}/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseWrapper<ProductDTO> updateProduct(@PathVariable(value = "id") String id, String name, Long price,
-			ProductTypeDTO type, Integer area, String location, byte[] image, HttpServletRequest httpRequest) {
+	public @ResponseBody ResponseWrapper<ProductDTO> updateProduct(@PathVariable(value = "id") String id, String name,
+			Long price, String type, Integer area, String location, byte[] image, HttpServletRequest httpRequest) {
 
-		String urlParams = "/" + id + "?" + "name=" + name + "&price=" + price + "&type=" + type.getName() + "&area="
-				+ area + "&location=" + location + "&image=" + image;
+		String urlParams = "/" + id + "?" + "name=" + name + "&price=" + price + "&type=" + type + "&area=" + area
+				+ "&location=" + location + "&image=" + image;
 
 		ProductDTO product = productService.getProductById(id);
 
@@ -88,14 +100,28 @@ public class ProductController {
 		responseWrapper.setUrlParams(urlParams);
 
 		if (product != null) {
+			for (ProductTypeDTO typeDto : ProductTypeDTO.values()) {
+				if (typeDto.name().equalsIgnoreCase(type)) {
+					updateProductByParams(name, price, ProductTypeDTO.valueOf(type.toUpperCase()), area, location,
+							image, product);
 
-			updateProductByParams(name, price, type, area, location, image, product);
+					productService.updateProduct(product);
 
-			productService.updateProduct(product);
+					responseWrapper.setData(product);
+					responseWrapper.setStatus(HttpStatus.OK);
+					LOGGER.info("Product updated : " + product.toString());
 
-			responseWrapper.setData(product);
-			responseWrapper.setStatus(HttpStatus.OK);
-			LOGGER.info("Product updated : " + product.toString());
+					return responseWrapper;
+				}
+			}
+
+			responseWrapper.setData(null);
+			responseWrapper.setStatus(HttpStatus.BAD_REQUEST);
+			responseWrapper.setError("Product type was not found: " + type);
+			LOGGER.info("Product type was not found: " + type);
+
+			return responseWrapper;
+
 		} else {
 			responseWrapper.setData(null);
 			responseWrapper.setStatus(HttpStatus.BAD_REQUEST);

@@ -6,6 +6,8 @@ public class ProductDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Integer id;
+
 	private String name;
 
 	private Long price;
@@ -17,6 +19,14 @@ public class ProductDTO implements Serializable {
 	private String location;
 
 	private byte[] image;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -68,7 +78,8 @@ public class ProductDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ProductDTO [name=" + name + ", price=" + price + ", type=" + type.getName() + ", area=" + area + ", location="
-				+ location + ", image=" + image.length + "]";
+		return "ProductDTO [id=" + id + ", name=" + name + ", price=" + price + ", type=" + type.name() + ", area=" + area
+				+ ", location=" + location + "]";
 	}
+
 }
