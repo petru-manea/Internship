@@ -1,6 +1,6 @@
-package service.product;
+package com.service.product;
 
-import model.product.ProductDTO;
+import com.model.product.ProductDTO;
 
 public interface ProductService {
 

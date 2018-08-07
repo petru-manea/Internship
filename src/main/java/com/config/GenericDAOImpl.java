@@ -1,4 +1,4 @@
-package config;
+package com.config;
 
 import java.io.Serializable;
 import java.util.List;
@@ -40,19 +40,22 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> implements Gene
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<T> findAll() {
-		return getEntityManager().createQuery("select x from" + getPersistentClass().getSimpleName() + " x")
+		return getEntityManager().createQuery("select x from " + getPersistentClass().getSimpleName() + " x")
 				.getResultList();
 	}
 
+	@Transactional
 	public void save(T entity) {
 		getEntityManager().persist(entity);
 	}
 
+	@Transactional
 	public T update(T entity) {
 		T mergedEntity = getEntityManager().merge(entity);
 		return mergedEntity;
 	}
 
+	@Transactional
 	public void delete(T entity) {
 		if (BaseEntity.class.isAssignableFrom(persistentClass)) {
 			((EntityManager) getEntityManager())
@@ -63,6 +66,7 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> implements Gene
 		}
 	}
 
+	@Transactional
 	public void flush() {
 		getEntityManager().flush();
 	}

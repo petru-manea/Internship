@@ -1,23 +1,18 @@
-package model.product;
+package com.model.product;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
-import config.BaseEntity;
+import com.config.BaseEntity;
 
+@Entity
 @Table(name = "PRODUCT")
 public class ProductEntity extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
 
 	@Column(name = "NAME", nullable = false)
 	private String name;
@@ -37,14 +32,6 @@ public class ProductEntity extends BaseEntity {
 
 	@Column(name = "IMAGE")
 	private byte[] image;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
@@ -96,7 +83,7 @@ public class ProductEntity extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "ProductEntity [id=" + id + ", name=" + name + ", price=" + price + ", type=" + type.name() + ", area=" + area
+		return "ProductEntity [id=" + getId() + ", name=" + name + ", price=" + price + ", type=" + type.name() + ", area=" + area
 				+ ", location=" + location + ", image=" + image.length + "]";
 	}
 

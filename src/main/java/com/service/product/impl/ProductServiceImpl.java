@@ -1,8 +1,11 @@
-package service.product.impl;
+package com.service.product.impl;
 
-import model.product.ProductDTO;
-import service.product.ProductService;
+import org.springframework.stereotype.Component;
 
+import com.model.product.ProductDTO;
+import com.service.product.ProductService;
+
+@Component
 public class ProductServiceImpl implements ProductService {
 
 	@Override

@@ -1,4 +1,4 @@
-package controller.product;
+package com.controller.product;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import config.ResponseWrapper;
-import model.product.ProductDTO;
-import model.product.ProductTypeDTO;
-import service.product.ProductService;
+import com.config.ResponseWrapper;
+import com.model.product.ProductDTO;
+import com.model.product.ProductTypeDTO;
+import com.service.product.ProductService;
 
 @Controller
 @RequestMapping(path = "/product")
@@ -52,8 +52,7 @@ public class ProductController {
 	}
 
 	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseWrapper<ProductDTO> getProductById(@PathVariable(value = "id") Integer id,
-			HttpServletRequest httpRequest) {
+	public @ResponseBody ResponseWrapper<ProductDTO> getProductById(@PathVariable(value = "id") Integer id) {
 
 		String urlParams = "/" + id;
 

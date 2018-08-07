@@ -1,8 +1,8 @@
-package config;
+package com.config;
 
 import org.springframework.data.repository.CrudRepository;
 
-import config.User;
+import com.config.User;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete

@@ -1,4 +1,4 @@
-package model.product;
+package com.model.product;
 
 public enum ProductTypeEntity {
 
