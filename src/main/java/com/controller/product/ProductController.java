@@ -68,7 +68,7 @@ public class ProductController {
 		} else {
 			responseWrapper.setData(null);
 			responseWrapper.setStatus(HttpStatus.BAD_REQUEST);
-			responseWrapper.setError(new Error("Product not found for id: " + id));
+			responseWrapper.setError("Product not found for id: " + id);
 			LOGGER.info("Product not found for id: " + id);
 		}
 
@@ -76,7 +76,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(path = "/{id}/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseWrapper<ProductDTO> updateProduct(@PathVariable(value = "id") String id, String name, Long price,
+	public @ResponseBody ResponseWrapper<ProductDTO> updateProduct(@PathVariable(value = "id") String id, String name, Long price,
 			ProductTypeDTO type, Integer area, String location, byte[] image, HttpServletRequest httpRequest) {
 
 		String urlParams = "/" + id + "?" + "name=" + name + "&price=" + price + "&type=" + type.getName() + "&area="
@@ -99,7 +99,7 @@ public class ProductController {
 		} else {
 			responseWrapper.setData(null);
 			responseWrapper.setStatus(HttpStatus.BAD_REQUEST);
-			responseWrapper.setError(new Error("Product not found for id: " + id));
+			responseWrapper.setError("Product not found for id: " + id);
 			LOGGER.info("Product not found for id: " + id);
 		}
 
@@ -107,7 +107,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(path = "/{id}/delete", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseWrapper<ProductDTO> deleteProduct(@PathVariable(value = "id") String id) {
+	public @ResponseBody ResponseWrapper<ProductDTO> deleteProduct(@PathVariable(value = "id") String id) {
 
 		String urlParams = "/" + id + "/delete";
 
@@ -125,7 +125,7 @@ public class ProductController {
 		} else {
 			responseWrapper.setData(null);
 			responseWrapper.setStatus(HttpStatus.BAD_REQUEST);
-			responseWrapper.setError(new Error("Product not found for id: " + id));
+			responseWrapper.setError("Product not found for id: " + id);
 			LOGGER.info("Product not found for id: " + id);
 		}
 

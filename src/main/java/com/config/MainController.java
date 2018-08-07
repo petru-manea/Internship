@@ -14,8 +14,6 @@ import com.model.product.ProductTypeEntity;
 @Controller
 @RequestMapping(path = "/demo")
 public class MainController {
-	@Autowired
-	private UserRepository userRepository;
 	
 	@Autowired
 	private ProductDAO productDAO;
