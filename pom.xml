@@ -38,6 +38,12 @@
 			<version>3.7</version>
 		</dependency>
 
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+		
 		<!-- Use MySQL Connector-J -->
 
 		<dependency>

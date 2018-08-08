@@ -7,9 +7,13 @@ import org.apache.commons.lang3.RandomUtils;
 
 public final class ProductFactory {
 
-	public static ProductEntity generateRandomProductEntity() {
+	public static ProductEntity generateRandomProductEntity(){
+		return generateRandomProductEntity(RandomUtils.nextInt());
+	}
+	
+	public static ProductEntity generateRandomProductEntity(Integer id) {
 		ProductEntity entity = new ProductEntity();
-		entity.setId(RandomUtils.nextInt());
+		entity.setId(id);
 		entity.setName(RandomStringUtils.randomAlphabetic(10));
 		entity.setPrice(RandomUtils.nextLong());
 		entity.setType(ProductTypeEntity.values()[RandomUtils.nextInt(0, 4)]);

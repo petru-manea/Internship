@@ -14,13 +14,18 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductDAO productDao;
-	
+
 	@Autowired
 	private ProductMapper productMapper;
-	
+
 	@Override
 	public void addProduct(ProductDTO product) {
-		productDao.save(productMapper.mapDtoToEntity(product));
+		if (product != null) {
+			productDao.save(productMapper.mapDtoToEntity(product));
+		}
+		else{
+			throw new IllegalArgumentException("Product is null!");
+		}
 	}
 
 	@Override
@@ -31,12 +36,22 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public void updateProduct(ProductDTO product) {
-		productDao.update(productMapper.mapDtoToEntity(product));
+		if (product != null) {
+			productDao.update(productMapper.mapDtoToEntity(product));
+		}
+		else{
+			throw new IllegalArgumentException("Product is null!");
+		}
 	}
 
 	@Override
 	public void deleteProduct(ProductDTO product) {
-		productDao.delete(productMapper.mapDtoToEntity(product));
+		if (product != null) {
+			productDao.delete(productMapper.mapDtoToEntity(product));
+		}
+		else{
+			throw new IllegalArgumentException("Product is null!");
+		}
 	}
 
 }
