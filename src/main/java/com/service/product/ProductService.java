@@ -1,8 +1,13 @@
 package com.service.product;
 
+
+import java.util.List;
+
 import com.model.product.ProductDTO;
 
-public interface ProductService {
+
+public interface ProductService  {
+	 
 
 	/**
 	 * Saves the product to database
@@ -32,5 +37,12 @@ public interface ProductService {
 	 * @param product
 	 */
 	void deleteProduct(ProductDTO product);
+
+	/**
+	 * Retrieves the list of products in the database 
+	 * 
+	 * @return
+	 */
+	List<ProductDTO> getProducts();
 
 }

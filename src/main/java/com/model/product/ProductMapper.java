@@ -1,5 +1,7 @@
 package com.model.product;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.google.common.collect.BiMap;
@@ -75,5 +77,10 @@ public class ProductMapper {
 		}
 		
 		return entity;
+	}
+
+	public List<ProductDTO> mapEntitiesToDto(List<ProductEntity> entities) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

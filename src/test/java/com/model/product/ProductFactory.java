@@ -1,5 +1,7 @@
 package com.model.product;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -7,6 +9,16 @@ import org.apache.commons.lang3.RandomUtils;
 
 public final class ProductFactory {
 
+	public static List<ProductEntity> generateRandomProductEntities(int size){
+		List<ProductEntity> entities = new ArrayList<ProductEntity>();
+		for(int i=0; i<size; i++){
+			entities.add(generateRandomProductEntity());
+		}
+		return entities;
+	}
+	
+
+	
 	public static ProductEntity generateRandomProductEntity(){
 		return generateRandomProductEntity(RandomUtils.nextInt());
 	}

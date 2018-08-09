@@ -2,7 +2,11 @@ package com.service.product.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -20,19 +24,19 @@ public class ProductServiceTest {
 
 	@Mock
 	private ProductDAO productDao;
-	
+
 	@InjectMocks
 	private ProductMapper productMapper;
-	
+
 	@InjectMocks
 	private ProductServiceImpl cut;
-	
+
 	@Before
-	public void init(){
+	public void init() {
 		MockitoAnnotations.initMocks(this);
 		ReflectionTestUtils.setField(cut, "productMapper", new ProductMapper());
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddProduct_Null() {
 		cut.addProduct(null);
@@ -41,14 +45,38 @@ public class ProductServiceTest {
 	@Test
 	public void testGetProductById() {
 		String id = "2";
-		
+
 		ProductEntity expected = ProductFactory.generateRandomProductEntity(new Integer(id));
-		
+
 		Mockito.when(productDao.findById(Mockito.anyInt())).thenReturn(expected);
-		
+
 		ProductDTO actual = cut.getProductById(id);
-		
+
 		assertEquals(expected.getId(), actual.getId());
+	}
+
+	//TODO [TG] run this test when the integration with mapper is finished and remove the Ignore addnotation
+	@Test
+	@Ignore
+	public void testGetProducts() {
+
+		List<ProductEntity> expected = ProductFactory.generateRandomProductEntities(RandomUtils.nextInt(0, 100));
+
+		Mockito.when(productDao.findAll()).thenReturn(expected);
+
+		List<ProductDTO> actual = cut.getProducts();
+
+		assertEquals(expected.size(), actual.size());
+
+		int found = 0;
+		for (ProductEntity entity : expected) {
+			for (ProductDTO dto : actual) {
+				if (entity.getId().equals(dto.getId())) {
+					found++;
+				}
+			}
+		}
+		assertEquals(expected.size(), found);
 	}
 
 	@Test(expected = IllegalArgumentException.class)

@@ -1,5 +1,7 @@
 package com.service.product.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,11 +30,6 @@ public class ProductServiceImpl implements ProductService {
 		}
 	}
 
-	@Override
-	public ProductDTO getProductById(String id) {
-		ProductEntity entity = productDao.findById(new Integer(id));
-		return productMapper.mapEntityToDto(entity);
-	}
 
 	@Override
 	public void updateProduct(ProductDTO product) {
@@ -53,5 +50,19 @@ public class ProductServiceImpl implements ProductService {
 			throw new IllegalArgumentException("Product is null!");
 		}
 	}
+	
+	@Override
+	public List<ProductDTO> getProducts() {
+		List<ProductEntity> entities = productDao.findAll();
+		return productMapper.mapEntitiesToDto(entities);
+	}
+	
+	@Override
+	public ProductDTO getProductById(String id) {
+		ProductEntity entity = productDao.findById(new Integer(id));
+		return productMapper.mapEntityToDto(entity);
+	}
 
+	
+	
 }

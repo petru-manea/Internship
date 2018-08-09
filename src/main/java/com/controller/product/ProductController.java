@@ -1,5 +1,7 @@
 package com.controller.product;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.jboss.logging.Logger;
@@ -86,6 +88,31 @@ public class ProductController {
 
 		return responseWrapper;
 	}
+	
+	@GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseWrapper<List<ProductDTO>> getProducts() {
+
+		String urlParams = "/all";
+
+		List<ProductDTO> products = productService.getProducts();
+
+		ResponseWrapper<List<ProductDTO>> responseWrapper = new ResponseWrapper<List<ProductDTO>>();
+		responseWrapper.setUrlParams(urlParams);
+
+		if (products != null && !products.isEmpty()) {
+			responseWrapper.setData(products);
+			responseWrapper.setStatus(HttpStatus.OK);
+			LOGGER.info("Product retrieved : " + products.toString());
+		} else {
+			responseWrapper.setData(null);
+			responseWrapper.setStatus(HttpStatus.BAD_REQUEST);
+			responseWrapper.setError("Products not found");
+			LOGGER.info("Products not found");
+		}
+
+		return responseWrapper;
+	}
+
 
 	@RequestMapping(path = "/{id}/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseWrapper<ProductDTO> updateProduct(@PathVariable(value = "id") String id, String name,
