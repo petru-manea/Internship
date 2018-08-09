@@ -1,5 +1,6 @@
 package com.model.product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -17,6 +18,30 @@ public class ProductMapper {
 			.put(ProductTypeEntity.HOTEL, ProductTypeDTO.HOTEL)
 			.build();
 
+	public List<ProductDTO> mapEntitiesToDto(List<ProductEntity> entities){
+		if(entities == null){
+			return null;
+		}
+		
+		List<ProductDTO> dtos = new ArrayList<>();
+		for(ProductEntity entity : entities){
+			dtos.add(mapEntityToDto(entity));
+		}
+		return dtos;
+	}
+	
+	public List<ProductEntity> mapDtosToEntity(List<ProductDTO> dtos){
+		if(dtos == null){
+			return null;
+		}
+		List<ProductEntity> entities = new ArrayList<>();
+		
+		for(ProductDTO dto : dtos){
+			entities.add(mapDtoToEntity(dto));
+		}
+		return entities;
+	}
+	
 	public ProductDTO mapEntityToDto(ProductEntity entity){
 		if(entity == null){
 			return null;
@@ -77,10 +102,5 @@ public class ProductMapper {
 		}
 		
 		return entity;
-	}
-
-	public List<ProductDTO> mapEntitiesToDto(List<ProductEntity> entities) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

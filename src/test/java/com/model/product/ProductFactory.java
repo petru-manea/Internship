@@ -17,7 +17,13 @@ public final class ProductFactory {
 		return entities;
 	}
 	
-
+	public static List<ProductDTO> generateRandomProductDtos(int size){
+		List<ProductDTO> dtos = new ArrayList<ProductDTO>();
+		for(int i=0; i<size; i++){
+			dtos.add(generateRandomProductDTO());
+		}
+		return dtos;
+	}
 	
 	public static ProductEntity generateRandomProductEntity(){
 		return generateRandomProductEntity(RandomUtils.nextInt());

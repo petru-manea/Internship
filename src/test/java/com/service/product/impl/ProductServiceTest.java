@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -55,9 +54,7 @@ public class ProductServiceTest {
 		assertEquals(expected.getId(), actual.getId());
 	}
 
-	//TODO [TG] run this test when the integration with mapper is finished and remove the Ignore addnotation
 	@Test
-	@Ignore
 	public void testGetProducts() {
 
 		List<ProductEntity> expected = ProductFactory.generateRandomProductEntities(RandomUtils.nextInt(0, 100));
