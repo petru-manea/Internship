@@ -1,4 +1,4 @@
-package com.model.review;
+package com.model.amanity;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -8,23 +8,20 @@ import java.util.List;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 
-public class ReviewMapperTest {
-
-	private ReviewMapper cut = new ReviewMapper();
+public class AmanityMapperTest {
+	
+	private AmanityMapper cut = new AmanityMapper();
 
 	@Test
 	public void testMapEntityToDto_NotNull() {
-		ReviewEntity expected = ReviewFactory.generateRandomReviewEntity();
+		AmanityEntity expected = AmanityFactory.generateRandomAmanityEntity();
 
-		ReviewDTO result = cut.mapEntityToDto(expected);
+		AmanityDTO result = cut.mapEntityToDto(expected);
 
-		ReviewEntity actual = cut.mapDtoToEntity(result);
+		AmanityEntity actual = cut.mapDtoToEntity(result);
 
 		assertEquals(expected.getId(), actual.getId());
 		assertEquals(expected.getName(), actual.getName());
-		assertEquals(expected.getRating(), actual.getRating());
-		assertEquals(expected.getDate(), actual.getDate());
-		assertEquals(expected.getText(), actual.getText());
 
 	}
 	
@@ -36,17 +33,14 @@ public class ReviewMapperTest {
 	@Test
 	public void testMapDtoToEntity_NotNull() {
 
-	  	ReviewDTO expected = ReviewFactory.generateRandomReviewDTO();
+		AmanityDTO expected = AmanityFactory.generateRandomAmanityDTO();
 
-		ReviewEntity result = cut.mapDtoToEntity(expected);
+		AmanityEntity result = cut.mapDtoToEntity(expected);
 
-		ReviewDTO actual = cut.mapEntityToDto(result);
+		AmanityDTO actual = cut.mapEntityToDto(result);
 
 		assertEquals(expected.getId(), actual.getId());
 		assertEquals(expected.getName(), actual.getName());
-		assertEquals(expected.getRating(), actual.getRating());
-		assertEquals(expected.getDate(), actual.getDate());
-		assertEquals(expected.getText(), actual.getText());
 	}
 
 	@Test
@@ -56,11 +50,11 @@ public class ReviewMapperTest {
 	
 	@Test
 	public void testMapTypeEntityToDto_NotNull() {
-		ReviewTypeEntity expected = ReviewFactory.generateRandomReviewTypeEntity();
+		AmanityTypeEntity expected = AmanityFactory.generateRandomAmanityTypeEntity();
 
-		ReviewTypeDTO result = cut.mapTypeEntityToDto(expected);
+		AmanityTypeDTO result = cut.mapTypeEntityToDto(expected);
 
-		ReviewTypeEntity actual = cut.mapTypeDtoToEntity(result);
+		AmanityTypeEntity actual = cut.mapTypeDtoToEntity(result);
 
 		assertEquals(expected.name(), actual.name());
 	}
@@ -73,11 +67,11 @@ public class ReviewMapperTest {
 	@Test
 	public void testMapTypeDtoToEntity_NotNull() {
 
-		ReviewTypeDTO expected = ReviewFactory.generateRandomReviewTypeDTO();
+		AmanityTypeDTO expected = AmanityFactory.generateRandomAmanityTypeDTO();
 
-		ReviewTypeEntity result = cut.mapTypeDtoToEntity(expected);
+		AmanityTypeEntity result = cut.mapTypeDtoToEntity(expected);
 
-		ReviewTypeDTO actual = cut.mapTypeEntityToDto(result);
+		AmanityTypeDTO actual = cut.mapTypeEntityToDto(result);
 
 		assertEquals(expected.name(), actual.name());
 	}
@@ -89,18 +83,18 @@ public class ReviewMapperTest {
 	
 	@Test
 	public void testMapEntitiesToDto_NotNull(){
-		List<ReviewEntity> expected = ReviewFactory.generateRandomReviewEntities(RandomUtils.nextInt(0, 100));
+		List<AmanityEntity> expected = AmanityFactory.generateRandomAmanityEntities(RandomUtils.nextInt(0, 100));
 		
-		List<ReviewDTO> result = cut.mapEntitiesToDto(expected);
+		List<AmanityDTO> result = cut.mapEntitiesToDto(expected);
 		
-		List<ReviewEntity> actual = cut.mapDtosToEntity(result);
+		List<AmanityEntity> actual = cut.mapDtosToEntity(result);
 	
 		assertEquals(expected.size(), actual.size());
 		
 		int found = 0;
 		
-		for(ReviewEntity entity : expected){
-			for(ReviewEntity otherEntity : actual){
+		for(AmanityEntity entity : expected){
+			for(AmanityEntity otherEntity : actual){
 				if(entity.getId().equals(otherEntity.getId())){
 					found++;
 				}
@@ -117,18 +111,18 @@ public class ReviewMapperTest {
 	
 	@Test
 	public void testMapDtosToEntity_NotNull(){
-		List<ReviewDTO> expected = ReviewFactory.generateRandomReviewDtos(RandomUtils.nextInt(0, 100));
+		List<AmanityDTO> expected = AmanityFactory.generateRandomAmanityDtos(RandomUtils.nextInt(0, 100));
 		
-		List<ReviewEntity> result = cut.mapDtosToEntity(expected);
+		List<AmanityEntity> result = cut.mapDtosToEntity(expected);
 		
-		List<ReviewDTO> actual = cut.mapEntitiesToDto(result);
+		List<AmanityDTO> actual = cut.mapEntitiesToDto(result);
 		
 		assertEquals(expected.size(), actual.size());
 		
 		int found = 0;
 		
-		for(ReviewDTO dto : expected){
-			for(ReviewDTO otherDto : actual){
+		for(AmanityDTO dto : expected){
+			for(AmanityDTO otherDto : actual){
 				if(dto.getId().equals(otherDto.getId())){
 					found++;
 				}

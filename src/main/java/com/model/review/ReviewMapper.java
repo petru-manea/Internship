@@ -3,12 +3,14 @@ package com.model.review;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 
-
-
+@Component
 public class ReviewMapper {
+	
 	private static final BiMap<ReviewTypeEntity, ReviewTypeDTO> REVIEW_TYPE_MAPPER = new ImmutableBiMap.Builder<ReviewTypeEntity, ReviewTypeDTO>()
 			.put(ReviewTypeEntity.ONE, ReviewTypeDTO.ONE)
 			.put(ReviewTypeEntity.TWO, ReviewTypeDTO.TWO)

@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 
-public class ReviewFactory {
+public final class ReviewFactory {
 
 	public static List<ReviewEntity> generateRandomReviewEntities(int size) {
 		List<ReviewEntity> entities = new ArrayList<ReviewEntity>();
