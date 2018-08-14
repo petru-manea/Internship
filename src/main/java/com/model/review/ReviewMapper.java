@@ -11,13 +11,13 @@ import com.google.common.collect.ImmutableBiMap;
 @Component
 public class ReviewMapper {
 	
-	private static final BiMap<ReviewTypeEntity, ReviewTypeDTO> REVIEW_TYPE_MAPPER = new ImmutableBiMap.Builder<ReviewTypeEntity, ReviewTypeDTO>()
-			.put(ReviewTypeEntity.ONE, ReviewTypeDTO.ONE)
-			.put(ReviewTypeEntity.TWO, ReviewTypeDTO.TWO)
-			.put(ReviewTypeEntity.THREE, ReviewTypeDTO.THREE)
-			.put(ReviewTypeEntity.FOUR, ReviewTypeDTO.FOUR)
-			.put(ReviewTypeEntity.FIVE, ReviewTypeDTO.FIVE)
-			.put(ReviewTypeEntity.ZERO, ReviewTypeDTO.ZERO)
+	private static final BiMap<RatingTypeEntity, RatingTypeDTO> REVIEW_TYPE_MAPPER = new ImmutableBiMap.Builder<RatingTypeEntity, RatingTypeDTO>()
+			.put(RatingTypeEntity.ONE, RatingTypeDTO.ONE)
+			.put(RatingTypeEntity.TWO, RatingTypeDTO.TWO)
+			.put(RatingTypeEntity.THREE, RatingTypeDTO.THREE)
+			.put(RatingTypeEntity.FOUR, RatingTypeDTO.FOUR)
+			.put(RatingTypeEntity.FIVE, RatingTypeDTO.FIVE)
+			.put(RatingTypeEntity.ZERO, RatingTypeDTO.ZERO)
 			.build();
 
 	public List<ReviewDTO> mapEntitiesToDto(List<ReviewEntity> entities){
@@ -75,12 +75,12 @@ public class ReviewMapper {
 		return entity;
 	}
 	
-	public ReviewTypeDTO mapTypeEntityToDto(ReviewTypeEntity entity){
+	public RatingTypeDTO mapTypeEntityToDto(RatingTypeEntity entity){
 		if(entity == null){
 			return null;
 		}
 		
-		ReviewTypeDTO dto = REVIEW_TYPE_MAPPER.get(entity);
+		RatingTypeDTO dto = REVIEW_TYPE_MAPPER.get(entity);
 		
 		if(dto == null){
 			throw new IllegalArgumentException("Unknown Review type [" + entity.name() + "]");
@@ -89,12 +89,12 @@ public class ReviewMapper {
 		return dto;
 	}
 	
-	public ReviewTypeEntity mapTypeDtoToEntity(ReviewTypeDTO dto){
+	public RatingTypeEntity mapTypeDtoToEntity(RatingTypeDTO dto){
 		if(dto == null){
 			return null;
 		}
 		
-		ReviewTypeEntity entity = REVIEW_TYPE_MAPPER.inverse().get(dto);
+		RatingTypeEntity entity = REVIEW_TYPE_MAPPER.inverse().get(dto);
 		
 		if(entity == null){
 			throw new IllegalArgumentException("Unknown Review type [" + dto.name() + "]");

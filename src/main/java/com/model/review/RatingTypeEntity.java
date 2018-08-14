@@ -1,6 +1,6 @@
 package com.model.review;
 
-public enum ReviewTypeEntity {
+public enum RatingTypeEntity {
 	
 	ONE,
 	TWO,

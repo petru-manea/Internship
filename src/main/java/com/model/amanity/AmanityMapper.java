@@ -50,7 +50,7 @@ public class AmanityMapper {
 		
 		AmanityDTO dto = new AmanityDTO();
 		dto.setId(entity.getId());
-		dto.setName(entity.getName());
+		dto.setName(mapTypeEntityToDto(entity.getName()));
 
 		return dto;
 	}
@@ -62,7 +62,7 @@ public class AmanityMapper {
 		
 		AmanityEntity entity = new AmanityEntity();
 		entity.setId(dto.getId());
-		entity.setName(dto.getName());
+		entity.setName(mapTypeDtoToEntity(dto.getName()));
 		
 		return entity;
 	}

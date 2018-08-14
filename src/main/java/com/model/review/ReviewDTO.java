@@ -11,7 +11,7 @@ public class ReviewDTO implements Serializable {
 	
 	private String name;
 	
-	private ReviewTypeDTO rating;
+	private RatingTypeDTO rating;
 	
 	private Date date;
 	
@@ -33,11 +33,11 @@ public class ReviewDTO implements Serializable {
 		this.name = name;
 	}
 
-	public ReviewTypeDTO getRating() {
+	public RatingTypeDTO getRating() {
 		return rating;
 	}
 
-	public void setRating(ReviewTypeDTO rating) {
+	public void setRating(RatingTypeDTO rating) {
 		this.rating = rating;
 	}
 

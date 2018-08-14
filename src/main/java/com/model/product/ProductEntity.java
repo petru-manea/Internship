@@ -1,12 +1,16 @@
 package com.model.product;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.config.BaseEntity;
+import com.model.productdetail.ProductDetailEntity;
 
 @Entity
 @Table(name = "PRODUCT")
@@ -32,6 +36,9 @@ public class ProductEntity extends BaseEntity {
 
 	@Column(name = "IMAGE")
 	private byte[] image;
+	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
+	private ProductDetailEntity productDetail;
 
 	public String getName() {
 		return name;
@@ -79,6 +86,15 @@ public class ProductEntity extends BaseEntity {
 
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+
+	public ProductDetailEntity getProductDetail() {
+		return productDetail;
+	}
+
+	public void setProductDetail(ProductDetailEntity productDetail) {
+		this.productDetail = productDetail;
+		productDetail.setProduct(this);
 	}
 
 	@Override

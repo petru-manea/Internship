@@ -56,11 +56,11 @@ public class ReviewMapperTest {
 	
 	@Test
 	public void testMapTypeEntityToDto_NotNull() {
-		ReviewTypeEntity expected = ReviewFactory.generateRandomReviewTypeEntity();
+		RatingTypeEntity expected = ReviewFactory.generateRandomReviewTypeEntity();
 
-		ReviewTypeDTO result = cut.mapTypeEntityToDto(expected);
+		RatingTypeDTO result = cut.mapTypeEntityToDto(expected);
 
-		ReviewTypeEntity actual = cut.mapTypeDtoToEntity(result);
+		RatingTypeEntity actual = cut.mapTypeDtoToEntity(result);
 
 		assertEquals(expected.name(), actual.name());
 	}
@@ -73,11 +73,11 @@ public class ReviewMapperTest {
 	@Test
 	public void testMapTypeDtoToEntity_NotNull() {
 
-		ReviewTypeDTO expected = ReviewFactory.generateRandomReviewTypeDTO();
+		RatingTypeDTO expected = ReviewFactory.generateRandomReviewTypeDTO();
 
-		ReviewTypeEntity result = cut.mapTypeDtoToEntity(expected);
+		RatingTypeEntity result = cut.mapTypeDtoToEntity(expected);
 
-		ReviewTypeDTO actual = cut.mapTypeEntityToDto(result);
+		RatingTypeDTO actual = cut.mapTypeEntityToDto(result);
 
 		assertEquals(expected.name(), actual.name());
 	}

@@ -3,7 +3,6 @@ package com.model.amanity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 
 public final class AmanityFactory {
@@ -30,7 +29,7 @@ public final class AmanityFactory {
 	public static AmanityEntity generateRandomAmanityEntity(Integer id) {
 		AmanityEntity entity = new AmanityEntity();
 		entity.setId(id);
-		entity.setName(RandomStringUtils.randomAlphabetic(10));
+		entity.setName(generateRandomAmanityTypeEntity());
 
 		return entity;
 	}
@@ -38,8 +37,8 @@ public final class AmanityFactory {
 	public static AmanityDTO generateRandomAmanityDTO() {
 		AmanityDTO dto = new AmanityDTO();
 		dto.setId(RandomUtils.nextInt());
-		dto.setName(RandomStringUtils.randomAlphabetic(10));
-		
+		dto.setName(generateRandomAmanityTypeDTO());
+
 		return dto;
 
 	}

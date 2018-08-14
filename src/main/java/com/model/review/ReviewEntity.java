@@ -6,9 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.config.BaseEntity;
+import com.model.productdetail.ProductDetailEntity;
 
 @Entity
 @Table(name = "REVIEW")
@@ -16,18 +19,26 @@ public class ReviewEntity extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "PRODUCT_DETAIL_ID", nullable = false)
+	private ProductDetailEntity productDetail;
+
 	@Column(name = "NAME", nullable = false)
 	private String name;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "RATING", nullable = false)
-	private ReviewTypeEntity rating;
-	
+	private RatingTypeEntity rating;
+
 	@Column(name = "DATE", nullable = false)
 	private Date date;
-	
+
 	@Column(name = "TEXT")
 	private String text;
+
+	public void setProductDetail(ProductDetailEntity productDetail) {
+		this.productDetail = productDetail;
+	}
 
 	public String getName() {
 		return name;
@@ -37,11 +48,11 @@ public class ReviewEntity extends BaseEntity {
 		this.name = name;
 	}
 
-	public ReviewTypeEntity getRating() {
+	public RatingTypeEntity getRating() {
 		return rating;
 	}
 
-	public void setRating(ReviewTypeEntity rating) {
+	public void setRating(RatingTypeEntity rating) {
 		this.rating = rating;
 	}
 
@@ -60,10 +71,11 @@ public class ReviewEntity extends BaseEntity {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "ProductEntity [id=" + getId() + ", name=" + name + ", rating=" + rating + ", date=" + date + ", text=" + text+ "]";
+		return "ReviewEntity [id=" + getId() + ", name=" + name + ", rating=" + rating + ", date=" + date + ", text="
+				+ text + "]";
 	}
 
 }

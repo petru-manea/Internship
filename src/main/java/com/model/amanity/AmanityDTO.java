@@ -8,7 +8,7 @@ public class AmanityDTO implements Serializable{
 
 	private Integer id;
 	
-	private String name;
+	private AmanityTypeDTO name;
 	
 	public Integer getId() {
 		return id;
@@ -18,11 +18,11 @@ public class AmanityDTO implements Serializable{
 		this.id = id;
 	}
 
-	public String getName() {
+	public AmanityTypeDTO getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(AmanityTypeDTO name) {
 		this.name = name;
 	}
 	

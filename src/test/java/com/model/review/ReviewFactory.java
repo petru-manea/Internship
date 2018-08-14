@@ -33,7 +33,7 @@ public final class ReviewFactory {
 		ReviewEntity entity = new ReviewEntity();
 		entity.setId(id);
 		entity.setName(RandomStringUtils.randomAlphabetic(10));
-		entity.setRating(ReviewTypeEntity.values()[RandomUtils.nextInt(0, 4)]);
+		entity.setRating(generateRandomReviewTypeEntity());
 		entity.setDate(Calendar.getInstance().getTime());
 		entity.setText(RandomStringUtils.randomAlphabetic(20));
 		return entity;
@@ -43,19 +43,19 @@ public final class ReviewFactory {
 		ReviewDTO dto = new ReviewDTO();
 		dto.setId(RandomUtils.nextInt());
 		dto.setName(RandomStringUtils.randomAlphabetic(10));
-		dto.setRating(ReviewTypeDTO.values()[RandomUtils.nextInt(0, 4)]);
+		dto.setRating(generateRandomReviewTypeDTO());
 		dto.setDate(Calendar.getInstance().getTime());
 		dto.setText(RandomStringUtils.randomAlphabetic(20));
 		return dto;
 
 	}
 
-	public static ReviewTypeEntity generateRandomReviewTypeEntity() {
-		return ReviewTypeEntity.values()[RandomUtils.nextInt(0, ReviewTypeEntity.values().length)];
+	public static RatingTypeEntity generateRandomReviewTypeEntity() {
+		return RatingTypeEntity.values()[RandomUtils.nextInt(0, RatingTypeEntity.values().length)];
 	}
 
-	public static ReviewTypeDTO generateRandomReviewTypeDTO() {
-		return ReviewTypeDTO.values()[RandomUtils.nextInt(0, ReviewTypeDTO.values().length)];
+	public static RatingTypeDTO generateRandomReviewTypeDTO() {
+		return RatingTypeDTO.values()[RandomUtils.nextInt(0, RatingTypeDTO.values().length)];
 	}
 
 }
