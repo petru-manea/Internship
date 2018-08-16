@@ -2,6 +2,8 @@ package com.dao.product.impl;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,6 +57,15 @@ public class ProductDAOImpl extends GenericDAOImpl<ProductEntity, Integer> imple
 	@Transactional
 	public void flush() {
 		super.flush();
+	}
+
+	@Override
+	@Transactional
+	public List<ProductEntity> findAllByName(String name) {
+		TypedQuery<ProductEntity> query =
+				getEntityManager().createNamedQuery(ProductEntity.FIND_BY_NAME, ProductEntity.class);
+		query.setParameter("name", "%" + name + "%");
+		return query.getResultList();
 	}
 
 }

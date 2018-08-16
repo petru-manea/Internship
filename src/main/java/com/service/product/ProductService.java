@@ -45,4 +45,11 @@ public interface ProductService  {
 	 */
 	List<ProductDTO> getProducts();
 
+	/**
+	 * Retrieves all products that contain a certain name
+	 * @param name
+	 * @return
+	 */
+	List<ProductDTO> getProductsByName(String name);
+
 }

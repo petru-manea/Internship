@@ -112,6 +112,30 @@ public class ProductController {
 
 		return responseWrapper;
 	}
+	
+	@GetMapping(path = "/all/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseWrapper<List<ProductDTO>> getProductsByName(@PathVariable(value = "name") String name) {
+
+		String urlParams = "/" + name;
+
+		List<ProductDTO> products = productService.getProductsByName(name);
+
+		ResponseWrapper<List<ProductDTO>> responseWrapper = new ResponseWrapper<List<ProductDTO>>();
+		responseWrapper.setUrlParams(urlParams);
+
+		if (products != null && !products.isEmpty()) {
+			responseWrapper.setData(products);
+			responseWrapper.setStatus(HttpStatus.OK);
+			LOGGER.info("Product retrieved : " + products.toString());
+		} else {
+			responseWrapper.setData(null);
+			responseWrapper.setStatus(HttpStatus.BAD_REQUEST);
+			responseWrapper.setError("Products not found");
+			LOGGER.info("Products not found");
+		}
+
+		return responseWrapper;
+	}
 
 
 	@RequestMapping(path = "/{id}/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)

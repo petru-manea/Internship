@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -14,7 +16,11 @@ import com.model.productdetail.ProductDetailEntity;
 
 @Entity
 @Table(name = "PRODUCT")
+@NamedQueries({ @NamedQuery(name = ProductEntity.FIND_BY_NAME, query = "SELECT product FROM ProductEntity product "
+		+ " WHERE product.name LIKE :name") })
 public class ProductEntity extends BaseEntity {
+
+	public static final String FIND_BY_NAME = "ProductEntity.findByName";
 
 	private static final long serialVersionUID = 1L;
 
@@ -36,7 +42,7 @@ public class ProductEntity extends BaseEntity {
 
 	@Column(name = "IMAGE")
 	private byte[] image;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
 	private ProductDetailEntity productDetail;
 
@@ -99,8 +105,8 @@ public class ProductEntity extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "ProductEntity [id=" + getId() + ", name=" + name + ", price=" + price + ", type=" + type.name() + ", area=" + area
-				+ ", location=" + location + "]";
+		return "ProductEntity [id=" + getId() + ", name=" + name + ", price=" + price + ", type=" + type.name()
+				+ ", area=" + area + ", location=" + location + "]";
 	}
 
 }
