@@ -14,7 +14,9 @@ import com.dao.product.ProductDAO;
 import com.model.amanity.AmanityEntity;
 import com.model.amanity.AmanityTypeEntity;
 import com.model.image.ImageEntity;
+import com.model.product.ProductDTO;
 import com.model.product.ProductEntity;
+import com.model.product.ProductMapper;
 import com.model.product.ProductTypeEntity;
 import com.model.productdetail.ProductDetailEntity;
 import com.model.review.RatingTypeEntity;
@@ -26,6 +28,9 @@ public class MainController {
 	
 	@Autowired
 	private ProductDAO productDAO;
+	
+	@Autowired
+	private ProductMapper productMapper;
 
 	@GetMapping(path = "/add")
 	public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email) {
@@ -74,7 +79,7 @@ public class MainController {
 	}
 
 	@GetMapping(path = "/all")
-	public @ResponseBody Iterable<ProductEntity> getAllUsers() {
-		return productDAO.findAll();
+	public @ResponseBody Iterable<ProductDTO> getAllUsers() {
+		return productMapper.mapEntitiesToDto(productDAO.findAll());
 	}
 }

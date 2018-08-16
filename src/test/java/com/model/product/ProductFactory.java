@@ -7,6 +7,8 @@ import java.util.Random;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 
+import com.model.ProductDetail.ProductDetailFactory;
+
 public final class ProductFactory {
 
 	public static List<ProductEntity> generateRandomProductEntities(int size){
@@ -41,6 +43,9 @@ public final class ProductFactory {
 		byte[] bytes = generateRandomByteArray(RandomUtils.nextInt(10, 100));
 
 		entity.setImage(bytes);
+		
+		entity.setProductDetail(ProductDetailFactory.generateRandomProductDetailEntity());
+		
 		return entity;
 	}
 
@@ -56,6 +61,9 @@ public final class ProductFactory {
 		byte[] bytes = generateRandomByteArray(RandomUtils.nextInt(10, 100));
 
 		dto.setImage(bytes);
+		
+		dto.setProductDetail(ProductDetailFactory.generateRandomProductDetailDTO());
+		
 		return dto;
 	}
 

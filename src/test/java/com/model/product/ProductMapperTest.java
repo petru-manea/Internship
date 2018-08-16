@@ -6,11 +6,42 @@ import static org.junit.Assert.assertNull;
 import java.util.List;
 
 import org.apache.commons.lang3.RandomUtils;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
+import org.springframework.test.util.ReflectionTestUtils;
+
+import com.model.amanity.AmanityMapper;
+import com.model.image.ImageMapper;
+import com.model.productdetail.ProductDetailMapper;
+import com.model.review.ReviewMapper;
 
 public class ProductMapperTest {
 
+	@InjectMocks
+	private ProductDetailMapper productDetailMapper;
+	
+	@InjectMocks
+	private AmanityMapper amanityMapper;
+	
+	@InjectMocks
+	private ReviewMapper reviewMapper;
+	
+	@InjectMocks
+	private ImageMapper imageMapper;
+	
 	private ProductMapper cut = new ProductMapper();
+	
+
+	@Before
+	public void init() {
+		MockitoAnnotations.initMocks(this);
+		ReflectionTestUtils.setField(productDetailMapper, "amanityMapper", new AmanityMapper());
+		ReflectionTestUtils.setField(productDetailMapper, "reviewMapper", new ReviewMapper());
+		ReflectionTestUtils.setField(productDetailMapper, "imageMapper", new ImageMapper());
+		ReflectionTestUtils.setField(cut, "productDetailMapper", productDetailMapper);
+	}
 
 	@Test
 	public void testMapEntityToDto_NotNull() {

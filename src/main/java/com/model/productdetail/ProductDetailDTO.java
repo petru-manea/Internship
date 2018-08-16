@@ -19,7 +19,7 @@ public class ProductDetailDTO implements Serializable {
 
 	private Integer sleeps;
 
-	private Integer badrooms;
+	private Integer bedrooms;
 
 	private Integer bathrooms;
 
@@ -63,12 +63,12 @@ public class ProductDetailDTO implements Serializable {
 		this.sleeps = sleeps;
 	}
 
-	public Integer getBadrooms() {
-		return badrooms;
+	public Integer getBedrooms() {
+		return bedrooms;
 	}
 
-	public void setBadrooms(Integer badrooms) {
-		this.badrooms = badrooms;
+	public void setBedrooms(Integer bedrooms) {
+		this.bedrooms = bedrooms;
 	}
 
 	public Integer getBathrooms() {
@@ -114,7 +114,7 @@ public class ProductDetailDTO implements Serializable {
 	@Override
 	public String toString() {
 		return "ProductDTO" + " [id=" + getId() + ", address=" + address + ", rating=" + rating + ", sleeps=" + sleeps
-				+ ", badrooms=" + badrooms + ", bathrooms=" + bathrooms + ", description=" + description
+				+ ", bedrooms=" + bedrooms + ", bathrooms=" + bathrooms + ", description=" + description
 				+ ", amanities=" + amanities + ", reviews=" + reviews + ", images=" + images + "]";
 	}
 }

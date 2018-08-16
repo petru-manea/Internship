@@ -1,6 +1,10 @@
 package com.model.product;
 
 import java.io.Serializable;
+import java.util.Arrays;
+
+
+import com.model.productdetail.ProductDetailDTO;
 
 public class ProductDTO implements Serializable {
 
@@ -19,6 +23,8 @@ public class ProductDTO implements Serializable {
 	private String location;
 
 	private byte[] image;
+	
+	private ProductDetailDTO productDetail;
 
 	public Integer getId() {
 		return id;
@@ -76,10 +82,21 @@ public class ProductDTO implements Serializable {
 		this.image = image;
 	}
 
+
+	public ProductDetailDTO getProductDetail() {
+		return productDetail;
+	}
+
+	public void setProductDetail(ProductDetailDTO productDetail) {
+		this.productDetail = productDetail;
+	}
+
 	@Override
 	public String toString() {
-		return "ProductDTO [id=" + id + ", name=" + name + ", price=" + price + ", type=" + type.name() + ", area=" + area
-				+ ", location=" + location + "]";
+		return "ProductDTO [id=" + id + ", name=" + name + ", price=" + price + ", type=" + type + ", area=" + area
+				+ ", location=" + location + ", image=" + Arrays.toString(image) + ", productDetail=" + productDetail
+				+ "]";
 	}
+	
 
 }

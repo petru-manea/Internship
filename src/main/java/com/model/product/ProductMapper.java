@@ -3,13 +3,18 @@ package com.model.product;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
+import com.model.productdetail.ProductDetailMapper;
 
 @Component
 public class ProductMapper {
+	
+	@Autowired
+	private ProductDetailMapper productDetailMapper;
 	
 	private static final BiMap<ProductTypeEntity, ProductTypeDTO> PRODUCT_TYPE_MAPPER = new ImmutableBiMap.Builder<ProductTypeEntity, ProductTypeDTO>()
 			.put(ProductTypeEntity.HOUSE, ProductTypeDTO.HOUSE)
@@ -55,8 +60,10 @@ public class ProductMapper {
 		dto.setArea(entity.getArea());
 		dto.setLocation(entity.getLocation());
 		dto.setImage(entity.getImage());
+		dto.setProductDetail(productDetailMapper.mapEntityToDto(entity.getProductDetail()));
 		
 		return dto;
+		
 	}
 	
 	public ProductEntity mapDtoToEntity(ProductDTO dto){
@@ -72,6 +79,7 @@ public class ProductMapper {
 		entity.setArea(dto.getArea());
 		entity.setLocation(dto.getLocation());
 		entity.setImage(dto.getImage());
+		entity.setProductDetail(productDetailMapper.mapDtoToEntity(dto.getProductDetail()));
 		
 		return entity;
 	}
