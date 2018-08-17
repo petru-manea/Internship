@@ -11,6 +11,7 @@ import com.config.GenericDAOImpl;
 import com.dao.product.ProductDAO;
 import com.model.product.ProductEntity;
 
+
 @Component
 public class ProductDAOImpl extends GenericDAOImpl<ProductEntity, Integer> implements ProductDAO {
 
@@ -65,6 +66,14 @@ public class ProductDAOImpl extends GenericDAOImpl<ProductEntity, Integer> imple
 		TypedQuery<ProductEntity> query =
 				getEntityManager().createNamedQuery(ProductEntity.FIND_BY_NAME, ProductEntity.class);
 		query.setParameter("name", "%" + name + "%");
+		return query.getResultList();
+	}
+	
+	@Override
+	@Transactional
+	public List<String> getAllProductNames() {
+		TypedQuery<String> query =
+				getEntityManager().createNamedQuery(ProductEntity.FIND_BY_NAME, String.class);
 		return query.getResultList();
 	}
 

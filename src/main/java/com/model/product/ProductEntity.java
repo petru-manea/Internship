@@ -16,11 +16,15 @@ import com.model.productdetail.ProductDetailEntity;
 
 @Entity
 @Table(name = "PRODUCT")
-@NamedQueries({ @NamedQuery(name = ProductEntity.FIND_BY_NAME, query = "SELECT product FROM ProductEntity product "
-		+ " WHERE product.name LIKE :name") })
+@NamedQueries({
+		@NamedQuery(name = ProductEntity.FIND_BY_NAME, query = "SELECT product FROM ProductEntity product "
+				+ " WHERE product.name LIKE :name"),
+		@NamedQuery(name = ProductEntity.GET_ALL_PRODUCT_NAMES, query = "SELECT product.name FROM ProductEntity product ") })
 public class ProductEntity extends BaseEntity {
 
 	public static final String FIND_BY_NAME = "ProductEntity.findByName";
+
+	public static final String GET_ALL_PRODUCT_NAMES = "ProductEntity.getAllProductNames";
 
 	private static final long serialVersionUID = 1L;
 

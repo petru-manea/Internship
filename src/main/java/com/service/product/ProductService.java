@@ -51,5 +51,11 @@ public interface ProductService  {
 	 * @return
 	 */
 	List<ProductDTO> getProductsByName(String name);
+	
+	/**
+	 * Retrieves all ProductNames
+	 * @return
+	 */
+	List<String> getAllProductNames();
 
 }

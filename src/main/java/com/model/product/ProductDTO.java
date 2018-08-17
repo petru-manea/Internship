@@ -3,7 +3,6 @@ package com.model.product;
 import java.io.Serializable;
 import java.util.Arrays;
 
-
 import com.model.productdetail.ProductDetailDTO;
 
 public class ProductDTO implements Serializable {

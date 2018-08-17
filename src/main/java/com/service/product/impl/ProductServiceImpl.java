@@ -69,5 +69,11 @@ public class ProductServiceImpl implements ProductService {
 		List<ProductEntity> entities = productDao.findAllByName(name);
 		return productMapper.mapEntitiesToDto(entities);
 	}
-	
+
+
+	@Override
+	public List<String> getAllProductNames() {
+		return productDao.getAllProductNames();
+	}
+
 }
