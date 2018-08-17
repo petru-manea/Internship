@@ -136,6 +136,54 @@ public class ProductController {
 
 		return responseWrapper;
 	}
+	
+	@GetMapping(path = "/allSortedByName", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseWrapper<List<ProductDTO>> getProductsSortedByName() {
+
+		String urlParams = "/allSortedByName";
+
+		List<ProductDTO> products = productService.sortedByName();
+
+		ResponseWrapper<List<ProductDTO>> responseWrapper = new ResponseWrapper<List<ProductDTO>>();
+		responseWrapper.setUrlParams(urlParams);
+
+		if (products != null && !products.isEmpty()) {
+			responseWrapper.setData(products);
+			responseWrapper.setStatus(HttpStatus.OK);
+			LOGGER.info("Product retrieved : " + products.toString());
+		} else {
+			responseWrapper.setData(null);
+			responseWrapper.setStatus(HttpStatus.BAD_REQUEST);
+			responseWrapper.setError("Products not found");
+			LOGGER.info("Products not found");
+		}
+
+		return responseWrapper;
+	}
+	
+	@GetMapping(path = "/allSortedByPrice", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseWrapper<List<ProductDTO>> getProductsSortedByPrice() {
+
+		String urlParams = "/allSortedByPrice";
+
+		List<ProductDTO> products = productService.sortedByPrice();
+
+		ResponseWrapper<List<ProductDTO>> responseWrapper = new ResponseWrapper<List<ProductDTO>>();
+		responseWrapper.setUrlParams(urlParams);
+
+		if (products != null && !products.isEmpty()) {
+			responseWrapper.setData(products);
+			responseWrapper.setStatus(HttpStatus.OK);
+			LOGGER.info("Product retrieved : " + products.toString());
+		} else {
+			responseWrapper.setData(null);
+			responseWrapper.setStatus(HttpStatus.BAD_REQUEST);
+			responseWrapper.setError("Products not found");
+			LOGGER.info("Products not found");
+		}
+
+		return responseWrapper;
+	}
 
 
 	@RequestMapping(path = "/{id}/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)

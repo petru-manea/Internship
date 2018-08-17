@@ -57,5 +57,17 @@ public interface ProductService  {
 	 * @return
 	 */
 	List<String> getAllProductNames();
+	
+	/**
+	 * Sorted by name all products
+	 * @return
+	 */
+	List<ProductDTO> sortedByName();
+
+	/**
+	 * 
+	 * @return
+	 */
+	List<ProductDTO> sortedByPrice();
 
 }

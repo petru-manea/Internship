@@ -73,7 +73,14 @@ public class ProductDAOImpl extends GenericDAOImpl<ProductEntity, Integer> imple
 	@Transactional
 	public List<String> getAllProductNames() {
 		TypedQuery<String> query =
-				getEntityManager().createNamedQuery(ProductEntity.FIND_BY_NAME, String.class);
+				getEntityManager().createNamedQuery(ProductEntity.GET_ALL_PRODUCT_NAMES, String.class);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<ProductEntity> sortedByName() {
+		TypedQuery<ProductEntity> query =
+				getEntityManager().createNamedQuery(ProductEntity.SORTED_ALL_PRODUCTS_BY_NAMES, ProductEntity.class);
 		return query.getResultList();
 	}
 

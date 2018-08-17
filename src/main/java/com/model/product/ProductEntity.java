@@ -19,8 +19,12 @@ import com.model.productdetail.ProductDetailEntity;
 @NamedQueries({
 		@NamedQuery(name = ProductEntity.FIND_BY_NAME, query = "SELECT product FROM ProductEntity product "
 				+ " WHERE product.name LIKE :name"),
-		@NamedQuery(name = ProductEntity.GET_ALL_PRODUCT_NAMES, query = "SELECT product.name FROM ProductEntity product ") })
+		@NamedQuery(name = ProductEntity.GET_ALL_PRODUCT_NAMES, query = "SELECT product.name FROM ProductEntity product"),
+		@NamedQuery(name = ProductEntity.SORTED_ALL_PRODUCTS_BY_NAMES, query = "SELECT product FROM ProductEntity product "
+				+ "ORDER BY product.name") })
 public class ProductEntity extends BaseEntity {
+
+	public static final String SORTED_ALL_PRODUCTS_BY_NAMES ="ProductEntity.sortedByName";
 
 	public static final String FIND_BY_NAME = "ProductEntity.findByName";
 
