@@ -12,46 +12,44 @@ import com.model.productdetail.ProductDetailMapper;
 
 @Component
 public class ProductMapper {
-	
+
 	@Autowired
 	private ProductDetailMapper productDetailMapper;
-	
-	private static final BiMap<ProductTypeEntity, ProductTypeDTO> PRODUCT_TYPE_MAPPER = new ImmutableBiMap.Builder<ProductTypeEntity, ProductTypeDTO>()
-			.put(ProductTypeEntity.HOUSE, ProductTypeDTO.HOUSE)
-			.put(ProductTypeEntity.VILLA, ProductTypeDTO.VILLA)
-			.put(ProductTypeEntity.APARTAMENT, ProductTypeDTO.APARTMENT)
-			.put(ProductTypeEntity.HOTEL, ProductTypeDTO.HOTEL)
-			.build();
 
-	public List<ProductDTO> mapEntitiesToDto(List<ProductEntity> entities){
-		if(entities == null){
+	private static final BiMap<ProductTypeEntity, ProductTypeDTO> PRODUCT_TYPE_MAPPER = new ImmutableBiMap.Builder<ProductTypeEntity, ProductTypeDTO>()
+			.put(ProductTypeEntity.HOUSE, ProductTypeDTO.HOUSE).put(ProductTypeEntity.VILLA, ProductTypeDTO.VILLA)
+			.put(ProductTypeEntity.APARTAMENT, ProductTypeDTO.APARTMENT)
+			.put(ProductTypeEntity.HOTEL, ProductTypeDTO.HOTEL).build();
+
+	public List<ProductDTO> mapEntitiesToDto(List<ProductEntity> entities) {
+		if (entities == null) {
 			return null;
 		}
-		
+
 		List<ProductDTO> dtos = new ArrayList<>();
-		for(ProductEntity entity : entities){
+		for (ProductEntity entity : entities) {
 			dtos.add(mapEntityToDto(entity));
 		}
 		return dtos;
 	}
-	
-	public List<ProductEntity> mapDtosToEntity(List<ProductDTO> dtos){
-		if(dtos == null){
+
+	public List<ProductEntity> mapDtosToEntity(List<ProductDTO> dtos) {
+		if (dtos == null) {
 			return null;
 		}
 		List<ProductEntity> entities = new ArrayList<>();
-		
-		for(ProductDTO dto : dtos){
+
+		for (ProductDTO dto : dtos) {
 			entities.add(mapDtoToEntity(dto));
 		}
 		return entities;
 	}
-	
-	public ProductDTO mapEntityToDto(ProductEntity entity){
-		if(entity == null){
+
+	public ProductDTO mapEntityToDto(ProductEntity entity) {
+		if (entity == null) {
 			return null;
 		}
-		
+
 		ProductDTO dto = new ProductDTO();
 		dto.setId(entity.getId());
 		dto.setName(entity.getName());
@@ -60,17 +58,19 @@ public class ProductMapper {
 		dto.setArea(entity.getArea());
 		dto.setLocation(entity.getLocation());
 		dto.setImage(entity.getImage());
-		dto.setProductDetail(productDetailMapper.mapEntityToDto(entity.getProductDetail()));
-		
+		if (entity.getProductDetail() != null) {
+			dto.setProductDetail(productDetailMapper.mapEntityToDto(entity.getProductDetail()));
+		}
+
 		return dto;
-		
+
 	}
-	
-	public ProductEntity mapDtoToEntity(ProductDTO dto){
-		if(dto == null){
+
+	public ProductEntity mapDtoToEntity(ProductDTO dto) {
+		if (dto == null) {
 			return null;
 		}
-		
+
 		ProductEntity entity = new ProductEntity();
 		entity.setId(dto.getId());
 		entity.setName(dto.getName());
@@ -79,36 +79,38 @@ public class ProductMapper {
 		entity.setArea(dto.getArea());
 		entity.setLocation(dto.getLocation());
 		entity.setImage(dto.getImage());
-		entity.setProductDetail(productDetailMapper.mapDtoToEntity(dto.getProductDetail()));
-		
+		if (dto.getProductDetail() != null) {
+			entity.setProductDetail(productDetailMapper.mapDtoToEntity(dto.getProductDetail()));
+		}
+
 		return entity;
 	}
-	
-	public ProductTypeDTO mapTypeEntityToDto(ProductTypeEntity entity){
-		if(entity == null){
+
+	public ProductTypeDTO mapTypeEntityToDto(ProductTypeEntity entity) {
+		if (entity == null) {
 			return null;
 		}
-		
+
 		ProductTypeDTO dto = PRODUCT_TYPE_MAPPER.get(entity);
-		
-		if(dto == null){
+
+		if (dto == null) {
 			throw new IllegalArgumentException("Unknown product type [" + entity.name() + "]");
 		}
-		
+
 		return dto;
 	}
-	
-	public ProductTypeEntity mapTypeDtoToEntity(ProductTypeDTO dto){
-		if(dto == null){
+
+	public ProductTypeEntity mapTypeDtoToEntity(ProductTypeDTO dto) {
+		if (dto == null) {
 			return null;
 		}
-		
+
 		ProductTypeEntity entity = PRODUCT_TYPE_MAPPER.inverse().get(dto);
-		
-		if(entity == null){
+
+		if (entity == null) {
 			throw new IllegalArgumentException("Unknown product type [" + dto.name() + "]");
 		}
-		
+
 		return entity;
 	}
 }
